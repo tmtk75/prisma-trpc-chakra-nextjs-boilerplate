@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  server:
+    #
+    # $ docker build -t t3-app .
+    #
+    image: t3-app:latest
+    #build: .
+    depends_on:
+      - postgres
+      - localstack
+    ports:
+      - "${PORT-3000}:3000"
+    environment:
+      DATABASE_URL: postgresql://admin:abc123@postgres:5432/example
+      AWS_ACCESS_KEY_ID: whatever
+      AWS_SECRET_ACCESS_KEY: whatever
+      AWS_REGION: ap-northeast-1
+      AWS_ENDPOINT: http://localstack:4566
+

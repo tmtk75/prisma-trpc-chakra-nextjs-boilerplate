@@ -37,7 +37,10 @@ Next.js dev-server starts using postgresql and s3@localstack served by docker-co
 $ docker build -t t3-app .
 ...
 
-$ docker run t3-app
-```
-TBD
+$ docker compose -f docker-compose.yml -f t3-app.yml up -d
+...
 
+$ open http://localhost:3000
+```
+```
+$ aws --endpoint-url=http://localhost:4566 s3api create-bucket --bucket foobar --region us-east-1
