@@ -9,10 +9,22 @@ Just try the below commands, then open <http://localhsot:3000>.
 [0]$ docker compose up localstack postgres
 ...
 
+  # expected to work:
+  #   % PGPASSWORD=abc123 psql -h 127.0.0.1 -U admin example
+  #   % ..ra-nextjs-boilerplate on main% aws --endpoint-url=http://127.0.0.1:4566 s3 ls ; echo $?
+
 [1]$ yarn
 ...
 
-[1]$ AWS_ENDPOINT=http://localhost:4566 yarn dev
+[1]$ yarn prisma migrate dev -n initial
+...
+
+[1]$ aws --endpoint-url=http://localhost:4566 s3api create-bucket --bucket foobar --region us-east-1
+{
+    "Location": "/foobar"
+}
+
+[1]$ yarn dev
 ...
 ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 ...
